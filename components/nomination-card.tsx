@@ -48,7 +48,7 @@ export function NominationCard({
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>
-                  Once you put a Hit out, there is no going back
+                  <div className="text-sm text-muted-foreground">{offense}</div>
                 </DialogTitle>
               </DialogHeader>
             </DialogContent>
