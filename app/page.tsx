@@ -149,8 +149,8 @@ export default function Page() {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Live Leaderboards</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Watch rankings update in real-time. See who's climbing to the
-                  top and who's safe... for now.
+                  Watch rankings update in real-time. See who&apos;s climbing to
+                  the top and who&apos;s safe... for now.
                 </p>
               </CardContent>
             </Card>

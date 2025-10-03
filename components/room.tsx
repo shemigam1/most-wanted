@@ -17,13 +17,14 @@ import {
 } from "@/components/ui/dialog";
 import CreateHit from "@/components/create-hit";
 import { Nomination } from "@/lib/types";
-import { fetchRoomData } from "@/app/actions/rooms";
+import { fetchRoomData, RoomDataDub } from "@/app/actions/rooms";
 import { deleteHit } from "@/app/actions/hit";
 import { signOut } from "@/app/actions/auth";
+import { ApiResponse } from "@/lib/api";
 
 interface RoomClientComponentProps {
-  roomData: any;
-  hitsData: any;
+  roomData: ApiResponse<RoomDataDub>;
+  hitsData: ApiResponse<Nomination[]>;
   code: string;
   userId: string;
 }
@@ -34,7 +35,7 @@ export default function RoomClientComponent({
   code,
   userId,
 }: RoomClientComponentProps) {
-  console.log(roomData, "room data");
+  // console.log(roomData, "room data");
 
   const router = useRouter();
   if (!userId) {

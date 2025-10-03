@@ -44,7 +44,7 @@ export type HitActionResponse = {
 export type ActionResponse = {
   success: boolean;
   message: string;
-  data?: any;
+  data?: unknown;
   errors?: Record<string, string[]>;
   error?: string;
 };

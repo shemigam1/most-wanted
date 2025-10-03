@@ -11,8 +11,16 @@ import { getSession } from "@/lib/auth";
 import { getHitsByRoom } from "./hit";
 import { Router } from "lucide-react";
 
+export interface RoomDataDub {
+  id: string;
+  name: string;
+  description?: string | null;
+  code?: string;
+}
+
 // Define Zod schema for room validation
 const RoomSchema = z.object({
+  // id: z,
   name: z
     .string()
     .min(3, "Room name must be at least 3 characters")
