@@ -89,6 +89,8 @@ export function LoginForm({
       });
     }
   };
+  console.log("login form activated");
+  
 
   return (
     <form

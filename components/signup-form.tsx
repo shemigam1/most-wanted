@@ -95,6 +95,7 @@ export function SignupForm({
       });
     }
   };
+  console.log("signup form activated");
 
   return (
     <form
