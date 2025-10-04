@@ -17,10 +17,18 @@ import {
 } from "@/components/ui/dialog";
 import CreateHit from "@/components/create-hit";
 import { Nomination } from "@/lib/types";
-import { fetchRoomData, RoomDataDub } from "@/app/actions/rooms";
-import { deleteHit } from "@/app/actions/hit";
-import { signOut } from "@/app/actions/auth";
+// import { fetchRoomData, RoomDataDub } from "@/app/actions/rooms";
+// import { deleteHit } from "@/app/actions/hit";
+// import { signOut } from "@/app/actions/auth";
 import { ApiResponse } from "@/lib/api";
+import { deleteHit, getHitsByRoom, signOut } from "@/lib/api-client";
+
+export interface RoomDataDub {
+  id: string;
+  name: string;
+  description?: string | null;
+  code?: string;
+}
 
 interface RoomClientComponentProps {
   roomData: ApiResponse<RoomDataDub>;
@@ -34,13 +42,14 @@ export default function RoomClientComponent({
   hitsData,
   code,
   userId,
-}: RoomClientComponentProps) {
+}: // userId,
+RoomClientComponentProps) {
   // console.log(roomData, "room data");
 
   const router = useRouter();
-  if (!userId) {
-    router.push("/login");
-  }
+  // if (!userId) {
+  //   router.push("/login");
+  // }
   const [nominations, setNominations] = useState<Nomination[]>(
     hitsData?.data || []
   );
@@ -103,8 +112,9 @@ export default function RoomClientComponent({
 
   const handleSubmit = async () => {
     setOpen(false);
-    const newData = await fetchRoomData(code, roomId);
-    const hits = newData?.hitsResponse.data;
+    // const newData = await fetchRoomData(code, roomId);
+    const newData = await getHitsByRoom(roomId);
+    const hits = newData?.data;
     // console.log(hits, "hits fom submit");
     // console.log(typeof hits);
 
@@ -120,7 +130,7 @@ export default function RoomClientComponent({
         memberCount={9}
         onExit={async () => {
           await signOut();
-          // router.push("/rooms");
+          router.push("/");
         }}
       />
 

@@ -11,7 +11,8 @@ import { PasswordInput } from "./ui/password-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signUp } from "@/app/actions/auth";
+// import { signUp } from "@/app/actions/auth";
+import { signUp } from "@/lib/api-client";
 import { toast } from "sonner";
 
 // Custom resolver function that integrates with your validation
@@ -75,7 +76,13 @@ export function SignupForm({
       formData.append("password", data.password);
       formData.append("confirmPassword", data.confirmPassword);
 
-      const response = await signUp(formData);
+      // const response = await signUp(formData);
+      const response = await signUp(
+        data.username,
+        data.email,
+        data.password,
+        data.confirmPassword
+      );
       // console.log(data);
 
       if (response.success) {

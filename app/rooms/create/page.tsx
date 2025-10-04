@@ -15,15 +15,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { createRoom } from "@/app/actions/rooms";
+// import { createRoom } from "@/app/actions/rooms";
+import { createRoom } from "@/lib/api-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function CreateRoomForm({ user }: { user: string }) {
+export default function CreateRoomForm() {
   const router = useRouter();
-  if (!user) {
-    router.push("/login");
-  }
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -59,12 +58,14 @@ export default function CreateRoomForm({ user }: { user: string }) {
     setIsSubmitting(true);
 
     try {
-      const room = await createRoom(formData);
+      const room = await createRoom(formData.name, formData.description);
       console.log(room);
 
       //   console.log(room);
       if (room.success && room.data) {
         toast("room created");
+        console.log(room);
+
         router.push(`/rooms/${room.data.code}`);
         setSubmitSuccess(true);
       } else {

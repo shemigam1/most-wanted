@@ -10,7 +10,8 @@ import { PasswordInput } from "./ui/password-input";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "@/app/actions/auth";
+// import { signIn } from "@/app/actions/auth";
+import { signIn } from "@/lib/api-client";
 
 const loginFormResolver = (data: LoginFormData) => {
   const validationErrors = validateLoginForm(data);
@@ -70,7 +71,7 @@ export function LoginForm({
       formData.append("email", data.email);
       formData.append("password", data.password);
 
-      const response = await signIn(formData);
+      const response = await signIn(data.email, data.password);
       if (response.success) {
         console.log(data, "login data");
 
@@ -90,7 +91,6 @@ export function LoginForm({
     }
   };
   console.log("login form activated");
-  
 
   return (
     <form

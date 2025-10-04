@@ -16,7 +16,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { createHit } from "@/app/actions/hit";
+// import { createHit } from "@/app/actions/hit";
+import { createHit } from "@/lib/api-client";
 
 export default function CreateHit({
   onFormSubmit,
@@ -61,7 +62,7 @@ export default function CreateHit({
 
     try {
       const data = { ...formData, roomId };
-      const newHit = await createHit(data);
+      const newHit = await createHit(data.name, data.roomId, data.offense);
       console.log(newHit, "new hit");
 
       console.log("Room created:", formData);
