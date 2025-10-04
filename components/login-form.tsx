@@ -72,7 +72,9 @@ export function LoginForm({
 
       const response = await signIn(formData);
       if (response.success) {
-        // console.log("user login success");
+        console.log(formData, "login data");
+
+        console.log("user login success");
         router.push("/rooms");
       } else {
         setError("root", {
