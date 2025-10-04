@@ -70,6 +70,7 @@ export function LoginForm({
       const formData: FormData = new FormData();
       formData.append("email", data.email);
       formData.append("password", data.password);
+      console.log("/api/auth/login");
 
       const response = await signIn(data.email, data.password);
       if (response.success) {
@@ -78,12 +79,14 @@ export function LoginForm({
         console.log("user login success");
         router.push("/rooms");
       } else {
+        console.log("error");
         setError("root", {
           type: "manual",
           message: "Login failed. Please try again.",
         });
       }
     } catch (error) {
+      console.log("catch error");
       setError("root", {
         type: "manual",
         message: "An unexpected error occurred. Please try again.",
