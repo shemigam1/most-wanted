@@ -3,6 +3,7 @@ import { db } from "@/app/db";
 import { hit, rooms } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
 import { getCurrentUser } from "@/lib/dal";
+import { Nomination } from "@/lib/types";
 
 export async function GET(
   request: NextRequest,
@@ -42,7 +43,7 @@ export async function GET(
     }
 
     // Get all hits for the room
-    const hits = await db
+    const hits: Nomination[] = await db
       .select()
       .from(hit)
       .where(eq(hit.roomId, roomId))
