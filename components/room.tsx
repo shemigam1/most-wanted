@@ -20,7 +20,8 @@ import { Nomination } from "@/lib/types";
 // import { fetchRoomData, RoomDataDub } from "@/app/actions/rooms";
 // import { deleteHit } from "@/app/actions/hit";
 // import { signOut } from "@/app/actions/auth";
-import { ApiResponse } from "@/lib/api";
+// import { ApiResponse } from "@/lib/api";
+import { ApiResponse } from "@/lib/api-client";
 import { deleteHit, getHitsByRoom, signOut } from "@/lib/api-client";
 
 export interface RoomDataDub {

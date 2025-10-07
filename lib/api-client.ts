@@ -7,6 +7,14 @@ export type ApiResponse<T = any> = {
   errors?: Record<string, string[]>;
   error?: string;
 };
+export interface Room {
+  id: string;
+  name: string;
+  description?: string | null;
+  code?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 // Auth APIs
 export async function signIn(

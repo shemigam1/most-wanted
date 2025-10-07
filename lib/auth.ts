@@ -14,18 +14,14 @@ interface JWTPayload {
   [key: string]: string | number | boolean | null | undefined;
 }
 
-// Secret key for JWT signing (in a real app, use an environment variable)
 const JWT_SECRET = new TextEncoder().encode(
   process.env.JWT_SECRET || "your-secret-key-min-32-chars-long!!!"
 );
 
-// JWT expiration time
 const JWT_EXPIRATION = "7d"; // 7 days
 
-// Token refresh threshold (refresh if less than this time left)
 const REFRESH_THRESHOLD = 24 * 60 * 60; // 24 hours in seconds
 
-// Hash a password
 export async function hashPassword(password: string) {
   return hash(password, 10);
 }
@@ -86,25 +82,19 @@ export async function shouldRefreshToken(token: string): Promise<boolean> {
       clockTolerance: 15, // 15 seconds tolerance for clock skew
     });
 
-    // Get expiration time
     const exp = payload.exp as number;
     const now = Math.floor(Date.now() / 1000);
 
-    // If token expires within the threshold, refresh it
     return exp - now < REFRESH_THRESHOLD;
   } catch {
-    // If verification fails, token is invalid or expired
     return false;
   }
 }
 
-// Create a session using JWT
 export async function createSession(userId: string) {
   try {
-    // Create JWT with user data
     const token = await generateJWT({ userId });
 
-    // Store JWT in a cookie
     const cookieStore = await cookies();
     cookieStore.set({
       name: "auth_token",
@@ -134,7 +124,6 @@ export const getSession = cache(async () => {
 
     return payload ? { userId: payload.userId } : null;
   } catch (error) {
-    // Handle the specific prerendering error
     if (
       error instanceof Error &&
       error.message.includes("During prerendering, `cookies()` rejects")
